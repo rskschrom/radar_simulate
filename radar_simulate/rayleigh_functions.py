@@ -1,11 +1,15 @@
+'''
+Calculate the scattering amplitudes for particles that satisfy the Rayleigh approximation
+using formulas from Bohren and Huffman (1983)
+'''
 import numpy as np
 
+# a single core-shell spheroid
 def scatTwoLayerSpheroid(dielCore, dielShell,
                          thickness, maxDim,
                          wavelength, coreDepthFrac):
     c = thickness/2.
-    a = maxDim/2.
-    
+    a = maxDim/2.    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
@@ -28,7 +32,6 @@ def scatTwoLayerSpheroid(dielCore, dielShell,
     lh = (1.0-lv)/2.0
 
     # two layer part
-    #volf = (1.-coreDepthFrac)*(1.-coreDepthFrac*c/a)**2.
     volf = coreDepthFrac**3.
     vol_part = np.pi**2*(2.0*rad)**3/(6*wavelength**2)
 
@@ -46,11 +49,11 @@ def scatTwoLayerSpheroid(dielCore, dielShell,
 
     return shh, svv
 
+# a single homogeneous spheroid
 def scatSpheroid(diel, thickness,
                  maxDim, wavelength):
     c = thickness/2.
     a = maxDim/2.
-    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
@@ -79,6 +82,7 @@ def scatSpheroid(diel, thickness,
 
     return shh, svv
 
+# multiple homogeneous spheroids
 def scatSpheroidArr(diel, thickness,
                     maxDim, wavelength):
     numcalc = len(thickness)
@@ -114,12 +118,12 @@ def scatSpheroidArr(diel, thickness,
 
     return shh, svv
 
+# multiple core-shell spheroids
 def scatTwoLayerSpheroidArr(dielCore, dielShell,
                             thickness, maxDim,
                             wavelength, coreDepthFrac):
     c = thickness/2.
     a = maxDim/2.
-    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
