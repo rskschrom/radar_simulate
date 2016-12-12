@@ -9,7 +9,8 @@ def scatTwoLayerSpheroid(dielCore, dielShell,
                          thickness, maxDim,
                          wavelength, coreDepthFrac):
     c = thickness/2.
-    a = maxDim/2.    
+    a = maxDim/2.
+    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
@@ -53,7 +54,7 @@ def scatTwoLayerSpheroid(dielCore, dielShell,
 def scatSpheroid(diel, thickness,
                  maxDim, wavelength):
     c = thickness/2.
-    a = maxDim/2.
+    a = maxDim/2.    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
@@ -87,8 +88,7 @@ def scatSpheroidArr(diel, thickness,
                     maxDim, wavelength):
     numcalc = len(thickness)
     c = thickness/2.
-    a = maxDim/2.
-    
+    a = maxDim/2.    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
@@ -122,8 +122,9 @@ def scatSpheroidArr(diel, thickness,
 def scatTwoLayerSpheroidArr(dielCore, dielShell,
                             thickness, maxDim,
                             wavelength, coreDepthFrac):
+    numcalc = len(thickness)
     c = thickness/2.
-    a = maxDim/2.
+    a = maxDim/2.    
     rad = (c*a**2.)**(1./3.)
 
     #Rayleigh formulas
