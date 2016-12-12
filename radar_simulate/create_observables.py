@@ -88,12 +88,3 @@ def calculateEverythingLog(shh, svv, wavl, n, dmax_dim, ang_moments):
     zDR = logify(zdr)
     lDR = logify(ldr)
     return zH, zV, zDR, kdp, rhohv, lDR
-
-# function to return everthing for ease of use (use for bin output)
-def calculateEverythingBin(shh, svv, wavl, n, ang_moments):
-    zh, zv, zdr, kdp, rhohv, ldr = calculateEverything(shh, svv, wavl, n, dmax_dim, ang_moments)
-    zH = logify(zh)
-    zV = logify(zv)
-    zDR = logify(zdr)
-    lDR = logify(ldr)
-    return zH, zV, zDR, kdp, rhohv, lDR
