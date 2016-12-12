@@ -1,3 +1,7 @@
+'''
+Calculate the radar observables using the formulas from Ryzhkov et al. (2011)
+[dx.doi.org/10.1175/2010JAMC2363.1]. This version is used for bin model output.
+'''
 import numpy as np
 from util import logify
 from constants import kw2
