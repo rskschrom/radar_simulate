@@ -30,7 +30,7 @@ def exponentialDist(n0, lam, max_dim):
 
 def maxwellMixing(rho_snow, eps_ice):
 # estimate refractive index (Maxwell-Garnett)
-    rho_ice = 917. 
+    rho_ice = 920. 
     eps_fac = (eps_ice-1.)/(eps_ice+2.)
     eps_snow = (1.+2.*rho_snow/rho_ice*eps_fac)/(1.-rho_snow/rho_ice*eps_fac)
     return eps_snow
