@@ -4,6 +4,7 @@ Calculate the radar observables using the formulas from Ryzhkov et al. (2011)
 '''
 import numpy as np
 from util import logify
+from constants import kw2
 
 # function to integrate parameter over distribution
 def integrate(param, n, dmax_dim):
