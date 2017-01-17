@@ -28,6 +28,14 @@ def exponentialDist(n0, lam, max_dim):
     n = n0*np.exp(-lam*max_dim)
     return n, dmax_dim
 
+# create gamma distribution
+def gammaDist(nu, ni, an, max_dim):
+    numbins = len(max_dim)-1
+    dmax_dim = max_dim[1:numbins+1]-max_dim[0:numbins]
+    lam = 1./(2.*an)
+    n = 2.*ni*lam*np.exp(-lam*max_dim)
+    return n, dmax_dim
+
 def maxwellMixing(rho_snow, eps_ice):
 # estimate refractive index (Maxwell-Garnett)
     rho_ice = 920. 
