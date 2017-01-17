@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.special import gamma
 
 # module of common utility functions
 
