@@ -34,7 +34,7 @@ def gammaDist(nu, ni, an, max_dim):
     numbins = len(max_dim)-1
     dmax_dim = max_dim[1:numbins+1]-max_dim[0:numbins]
     lam = 1./(2.*an)
-    n = 2.*ni/gamma(nu)*lam**nu*max_dim**(nu-1.)*np.exp(-lam*max_dim)
+    n = ni/gamma(nu)*lam**nu*max_dim**(nu-1.)*np.exp(-lam*max_dim)
     return n, dmax_dim
 
 def maxwellMixing(rho_snow, eps_ice):
