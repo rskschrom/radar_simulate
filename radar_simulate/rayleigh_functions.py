@@ -4,6 +4,55 @@ using formulas from Bohren and Huffman (1983)
 '''
 import numpy as np
 
+# calculate shape factors for h and v directions for spheroids
+def getShapeFactors(asp):
+    #oblate spheroids
+    if (asp < 1.):
+        f = np.sqrt(1.0/asp**2-1.0)
+        lv = (1.0+f**2)/(f**2)*(1.0-np.arctan(f)/f)
+
+    #prolate spheroids
+    if (asp > 1.):
+        f = np.sqrt(1.0-1.0/asp**2)
+        lv = (1.0-f**2)/(f**2)*(1.0/(2.0*f)*np.log((1.0+f)/(1.0-f))-1.0)
+
+    #sphere
+    if (asp == 1.):
+        lv = 1./3.
+
+    lh = (1.0-lv)/2.0
+    return lh, lv
+
+# two-spheroid calculations with unique aspect ratios of core and shell spheroids
+def twoLayerUnique(dielCore, dielShell, aCore, aShell, cCore, cShell, wavl):
+
+    # get friendly values for function
+    aspCore = cCore/aCore
+    aspShell = cShell/aShell
+    eqDiamCore = 2.*(cCore*aCore**2.)**(1./3.)
+    eqDiamShell = 2.*(cShell*aShell**2.)**(1./3.)
+    vfCore = (eqDiamCore/eqDiamShell)**3.
+
+    # calculate shape parameters for core and shell
+    lhCore, lvCore = getShapeFactors(aspCore)
+    lhShell, lvShell = getShapeFactors(aspShell)
+
+    # calculate scattering amplitudes
+    vpart = np.pi**2.*eqDiamShell**3./(6.*wavl**2.)
+    numer_h = (dielShell-1.)*(dielShell+(dielCore-dielShell)*
+              (lhCore-vfCore*lhShell))+vfCore*dielShell*(dielCore-dielShell)
+    denom_h = (dielShell+(dielCore-dielShell)*(lhCore-vfCore*lhShell))*(
+               1.+(dielShell-1.)*lhShell)+vfCore*lhShell*dielShell*(dielCore-dielShell)
+
+    numer_v = (dielShell-1.)*(dielShell+(dielCore-dielShell)*
+              (lvCore-vfCore*lvShell))+vfCore*dielShell*(dielCore-dielShell)
+    denom_v = (dielShell+(dielCore-dielShell)*(lvCore-vfCore*lvShell))*(
+               1.+(dielShell-1.)*lvShell)+vfCore*lvShell*dielShell*(dielCore-dielShell)
+
+    shh = vpart*numer_h/denom_h
+    svv = vpart*numer_v/denom_v
+    return shh, svv
+
 # homogeneous spheroids
 def scatSpheroidArr(diel, thickness,
                     maxDim, wavelength):
