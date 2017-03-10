@@ -17,6 +17,19 @@ def angularGaussian(width_deg):
     moment_arr = np.array([a1, a2, a3, a4, a5, a6, a7])
     return moment_arr
 
+# random orientation in the horizontal plane
+def angularHoriz(beta_deg):
+    beta_rad = beta_deg*np.pi/180.
+    a1 = 1./2.*np.sin(beta_rad)**2.
+    a2 = 1./2.
+    a3 = 3./8.*np.sin(beta_rad)**2.
+    a4 = 3./8.
+    a5 = 1./8.*np.sin(beta_rad)**2.
+    a6 = 0.
+    a7 = -1./2**np.cos(beta_rad)**2.
+    moment_arr = np.array([a1, a2, a3, a4, a5, a6, a7])
+    return moment_arr
+
 # present in radar met units
 def logify(parameter):
     lparameter = 10.*np.log10(parameter)
