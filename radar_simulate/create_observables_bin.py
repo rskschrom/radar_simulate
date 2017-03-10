@@ -60,6 +60,18 @@ def calculateRhoHV(shh, svv, wavl, n, ang_moments):
     rhohv = np.abs(sumDiscrete(rhohv_param, n))*4.*wavl**4./(np.pi**4.*kw2*np.sqrt(zh*zv))
     return rhohv
 
+# rhohv function for addition later
+def calculateRhoHVNumer(shh, svv, wavl, n, ang_moments):
+    a1 = ang_moments[0]
+    a2 = ang_moments[1]
+    a5 = ang_moments[4]
+    zh = calculateZh(shh, svv, wavl, n, ang_moments)
+    zv = calculateZv(shh, svv, wavl, n, ang_moments)
+    rhohv_param = np.abs(shh)**2.+np.abs(shh-svv)**2.*a5-np.conj(shh)*(shh-svv)*a1+\
+                  -shh*(np.conj(shh)-np.conj(svv))*a2
+    rhohv_numer = sumDiscrete(rhohv_param, n)
+    return rhohv_numer
+
 # ldr function
 def calculateLdr(shh, svv, wavl, n, ang_moments):
     a5 = ang_moments[4]
