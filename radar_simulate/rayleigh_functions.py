@@ -54,8 +54,13 @@ def twoLayerUnique(dielCore, dielShell, aCore, aShell, cCore, cShell, wavl):
     return shh, svv
 
 # homogeneous spheroids
-def scatSpheroidArr(diel, thickness,
+def scatSpheroid(diel, thickness,
                     maxDim, wavelength):
+
+    if type(thickness) is float:
+        thickness = np.array([thickness])
+        maxDim = np.array([maxDim])
+
     numcalc = len(thickness)
     c = thickness/2.
     a = maxDim/2.    
@@ -89,9 +94,14 @@ def scatSpheroidArr(diel, thickness,
     return shh, svv
 
 # core-shell spheroids
-def scatTwoLayerSpheroidArr(dielCore, dielShell,
+def scatTwoLayerSpheroid(dielCore, dielShell,
                             thickness, maxDim,
                             wavelength, coreDepthFrac):
+
+    if type(thickness) is float:
+        thickness = np.array([thickness])
+        maxDim = np.array([maxDim])
+
     numcalc = len(thickness)
     c = thickness/2.
     a = maxDim/2.    
