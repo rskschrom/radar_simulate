@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.special import gamma
+from rayleigh_functions import getShapeFactors
 
 # module of common utility functions
 
@@ -56,3 +57,10 @@ def maxwellMixing(rho_snow, eps_ice):
     eps_fac = (eps_ice-1.)/(eps_ice+2.)
     eps_snow = (1.+2.*rho_snow/rho_ice*eps_fac)/(1.-rho_snow/rho_ice*eps_fac)
     return eps_snow
+
+# anisotropic effective medium with spheroidal inclusions
+def spheroidMixing(eps_mat, eps_inc, asp_inc, vfrac_inc):
+    lh, lv = getShapeFactors(asp_inc)
+    eps_h = eps_mat*(1.+vfrac_inc*(eps_inc-eps_mat)/(eps_mat+lh*(1.-vfrac_inc)*(eps_inc-eps_mat)))
+    eps_v = eps_mat*(1.+vfrac_inc*(eps_inc-eps_mat)/(eps_mat+lv*(1.-vfrac_inc)*(eps_inc-eps_mat)))
+    return eps_h, eps_v
