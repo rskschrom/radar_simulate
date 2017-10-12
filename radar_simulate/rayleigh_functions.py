@@ -136,7 +136,7 @@ def scatAnisotropicSpheroid(dielh, dielv, thickness,
 # core-shell spheroids
 def scatTwoLayerSpheroid(dielCore, dielShell,
                             thickness, maxDim,
-                            wavelength, coreDepthFrac):
+                            wavelength, coreVolFrac):
 
     if type(thickness) is float:
         thickness = np.array([thickness])
@@ -168,7 +168,7 @@ def scatTwoLayerSpheroid(dielCore, dielShell,
     lh = (1.0-lv)/2.0
 
     # two layer part
-    volf = (1.-coreDepthFrac)*(1.-coreDepthFrac*c/a)**2.
+    volf = coreVolFrac
     vol_part = np.pi**2*(2.0*rad)**3/(6*wavelength**2)
 
     e1 = dielCore

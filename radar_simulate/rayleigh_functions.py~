@@ -136,7 +136,7 @@ def scatAnisotropicSpheroid(dielh, dielv, thickness,
 # core-shell spheroids
 def scatTwoLayerSpheroid(dielCore, dielShell,
                             thickness, maxDim,
-                            wavelength, coreDepthFrac):
+                            wavelength, coreVolFrac):
 
     if type(thickness) is float:
         thickness = np.array([thickness])
